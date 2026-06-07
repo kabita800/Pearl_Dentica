@@ -9,10 +9,11 @@ import Doctors from "./Public/Doctors";
 import Contact from "./Public/Contact";
 import Services from "./Public/Services";
 
-
+import ScrollToTop from "./components/scrolltotop";
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop />
     <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

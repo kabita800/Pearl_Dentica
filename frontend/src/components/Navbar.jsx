@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
     <nav className="h-20 bg-white shadow-sm px-8">
       <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
-        
         {/* Logo */}
         <div className="flex items-center gap-2">
           <img
@@ -17,39 +17,88 @@ function Navbar() {
         {/* Menu */}
         <ul className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
           <li>
-            <Link to="/" className="hover:text-sky-500 transition">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ?
+                  "text-[#3BAFDA]  font-semibold"
+                : "hover:text-[#3BAFDA] transition"
+              }
+            >
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/about" className="hover:text-sky-500 transition">
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ?
+                  "text-[#3BAFDA]  font-semibold"
+                : "hover:text-[#3BAFDA] transition"
+              }
+            >
               About
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/services" className="hover:text-sky-500 transition">
+            <NavLink
+              to="/services"
+              className={({ isActive }) =>
+                isActive ?
+                  "text-[#3BAFDA]  font-semibold"
+                : "hover:text-[#3BAFDA] transition"
+              }
+            >
               Services
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/doctors" className="hover:text-sky-500 transition">
+            <NavLink
+              to="/doctors"
+              className={({ isActive }) =>
+                isActive ?
+                  "text-[#3BAFDA]  font-semibold"
+                : "hover:text-[#3BAFDA] transition"
+              }
+            >
               Doctors
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/appointment" className="hover:text-sky-500 transition">
+            <NavLink
+              to="/appointment"
+              className={({ isActive }) =>
+                isActive ?
+                  "text-[#3BAFDA]  font-semibold"
+                : "hover:text-[#3BAFDA] transition"
+              }
+            >
               Appointment
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/gallery" className="hover:text-sky-500 transition">
+            <NavLink
+              to="/gallery"
+              className={({ isActive }) =>
+                isActive ?
+                  "text-[#3BAFDA]  font-semibold"
+                : "hover:text-[#3BAFDA] transition"
+              }
+            >
               Gallery
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/contact" className="hover:text-sky-500 transition">
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ?
+                  "text-[#3BAFDA]  font-semibold"
+                : "hover:text-[#3BAFDA] transition"
+              }
+            >
               Contact
-            </Link>
+            </NavLink>
           </li>
         </ul>
 
