@@ -78,7 +78,7 @@ export default function Doctors() {
           {doctors.map((doctor, index) => (
             <div
               key={index}
-              className={`${doctor.bg} rounded-[28px] p-6 shadow-sm hover:shadow-lg transition-all duration-300`}
+              className={`${doctor.bg} rounded-[28px] p-6 shadow-sm hover:shadow-lg transition-110 duration-300`}
             >
               {/* Top Section */}
               <div className="flex flex-col md:flex-row gap-6">

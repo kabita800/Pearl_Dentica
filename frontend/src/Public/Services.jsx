@@ -79,59 +79,58 @@ export default function Services() {
     : null;
 
   return (
-    <section className="py-6 pb-14 bg-white">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-12 pb-14 bg-white px-4 md:px-6">
+      <div className="max-w-6xl mx-auto">
         {/* Heading */}
         <h1 className="text-4xl font-bold text-center">
           Our <span className="text-[#3ea0d0] italic">Services</span>
         </h1>
 
-        <p className="text-center text-gray-500 italic mb-12">
+        <p className="text-center text-gray-500 italic mb-16 mt-2 max-w-lg mx-auto text-sm md:text-base">
           Our comprehensive dental services are designed to meet all your oral
           health needs
         </p>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-x-5 gap-y-14 p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-14 p-4">
           {services.map((service, index) => (
             <React.Fragment key={index}>
               {/* Service Card */}
               <div
                 className="
-    group
-    bg-white
-    border border-gray-200
-    rounded-2xl
-    shadow-lg
-    hover:shadow-2xl
-    hover:-translate-y-2
-    hover:scale-[1.02]
-    transition-all
-    duration-300
-    ease-in-out
-    flex flex-col
-    items-center
-    text-center
-    p-5
-    relative
-  "
+                  group
+                  bg-white
+                  border border-gray-200
+                  rounded-2xl
+                  shadow-lg
+                  hover:shadow-2xl
+                  hover:-translate-y-2
+                  hover:scale-[1.02]
+                  transition-all
+                  duration-300
+                  ease-in-out
+                  flex flex-col
+                  items-center
+                  text-center
+                  p-6
+                  relative
+                "
               >
-                {" "}
                 {/* Image */}
-                <div className="-mt-12 mb-4">
+                <div className="-mt-14 mb-4">
                   <img
                     src={service.image}
                     alt={service.title}
                     className="
-  w-20 h-20
-  rounded-full
-  object-cover
-  border-4 border-white
-  shadow-md
-  transition-transform
-  duration-300
-  group-hover:scale-110
-"
+                      w-20 h-20
+                      rounded-full
+                      object-cover
+                      border-4 border-white
+                      shadow-md
+                      transition-transform
+                      duration-300
+                      group-hover:scale-110
+                    "
                   />
                 </div>
                 {/* Title */}
@@ -139,7 +138,7 @@ export default function Services() {
                   {service.title}
                 </h3>
                 {/* Description */}
-                <p className="text-gray-600 text-sm leading-6 mb-5">
+                <p className="text-gray-600 text-sm leading-6 mb-5 flex-grow">
                   {service.description}
                 </p>
                 {/* Button */}
@@ -147,7 +146,7 @@ export default function Services() {
                   onClick={() =>
                     setSelectedIndex(selectedIndex === index ? null : index)
                   }
-                  className="bg-[#3BAFDA] hover:bg-sky-500 text-white px-6 py-2 text-sm rounded-full transition"
+                  className="bg-[#3BAFDA] hover:bg-sky-500 text-white px-6 py-2 text-sm rounded-full transition cursor-pointer font-medium"
                 >
                   {selectedIndex === index ? "Close" : "Learn More"}
                 </button>
@@ -155,27 +154,42 @@ export default function Services() {
                 <div className="absolute bottom-0 left-0 w-full h-1 bg-[#3BAFDA]" />
               </div>
 
-              {/* Detail Section */}
+              {/* Detail Section - Mobile */}
+              {selectedIndex === index && (
+                <div className="block md:hidden w-full mt-4 bg-[#d8edf5] rounded-3xl p-6 text-left col-span-1 border border-sky-100">
+                  <div className="flex justify-center mb-4">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full max-w-[280px] h-40 object-cover rounded-2xl shadow-sm"
+                    />
+                  </div>
+                  <h2 className="text-xl font-bold mb-3 text-gray-900">{service.title}</h2>
+                  <p className="text-gray-700 leading-relaxed text-sm">{service.details}</p>
+                </div>
+              )}
+
+              {/* Detail Section - Desktop */}
               {selectedIndex !== null && index === rowEndIndex && (
-                <div className="md:col-span-3 mt-6 flex justify-center">
-                  <div className="bg-[#d8edf5] rounded-full p-8 md:p-10 max-w-5xl w-full">
+                <div className="hidden md:flex md:col-span-3 mt-6 justify-center">
+                  <div className="bg-[#d8edf5] rounded-full p-8 md:p-10 max-w-5xl w-full border border-sky-100">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
-                      {/* Oval Image */}
+                      {/* Image */}
                       <div className="flex justify-center">
                         <img
                           src={services[selectedIndex].image}
                           alt={services[selectedIndex].title}
-                          className="w-96 h-64 object-cover rounded-[999px]"
+                          className="w-full max-w-[360px] h-64 object-cover rounded-full shadow-md"
                         />
                       </div>
 
                       {/* Content */}
                       <div>
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                        <h2 className="text-3xl font-bold mb-4 text-gray-900">
                           {services[selectedIndex].title}
                         </h2>
 
-                        <p className="text-gray-700 leading-8 text-base">
+                        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
                           {services[selectedIndex].details}
                         </p>
                       </div>

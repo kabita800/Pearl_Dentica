@@ -29,7 +29,7 @@ const Appointment = () => {
 
   return (
     <div
-      className=" bg-white min-h-screen px-4 md:px-10 py-10 font-sans"
+      className=" bg-white min-h-screen px-4 md:px-25 py-10 font-sans"
     
     >
       {/* Appointment Form Card*/}

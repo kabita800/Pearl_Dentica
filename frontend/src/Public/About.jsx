@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const doctors = [
   {
@@ -24,6 +24,8 @@ const doctors = [
 ];
 
 const About = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
     <section className=" bg-white">
       <div className="max-w-6xl mx-auto px-4">
@@ -49,14 +51,13 @@ const About = () => {
               providing exceptional dental care in a comfortable, friendly, and
               modern environment. Our clinic combines advanced dental technology
               with a patient-centered approach to ensure every visit is safe,
-              effective, and stress-free.
-              We believe that quality dental care goes beyond treatment. It
-              involves building trust, understanding each patient's unique
-              needs, and helping them achieve healthy, confident smiles. Whether
-              you require preventive care, cosmetic dentistry, or restorative
-              treatments, our dedicated team strives to deliver personalized
-              solutions with compassion, professionalism, and attention to
-              detail.
+              effective, and stress-free. We believe that quality dental care
+              goes beyond treatment. It involves building trust, understanding
+              each patient's unique needs, and helping them achieve healthy,
+              confident smiles. Whether you require preventive care, cosmetic
+              dentistry, or restorative treatments, our dedicated team strives
+              to deliver personalized solutions with compassion,
+              professionalism, and attention to detail.
             </p>
           </div>
         </div>
@@ -84,11 +85,10 @@ const About = () => {
           </div>
 
           {/* Mission Card */}
-          <div className="bg-cyan-100 rounded-3xl p-6 shadow-sm">
+          <div className="bg-cyan-100 rounded-3xl p-6 shadow-sm transition-all duration-300 hover:shadow-xl">
+            {" "}
             <h3 className="text-2xl font-bold text-center mb-2">Mission</h3>
-
             <div className="w-24 h-1 bg-green-500 mx-auto mb-8"></div>
-
             <p className="text-gray-700 text-base leading-7">
               To become one of Nepal's most trusted and modern dental care
               brands known for premium patient experience, advanced dental
@@ -97,11 +97,10 @@ const About = () => {
           </div>
 
           {/* Vision Card */}
-          <div className="bg-green-100 rounded-3xl p-6 shadow-sm">
+          <div className="bg-green-100 rounded-3xl p-6 shadow-sm transition-all duration-300 hover:shadow-xl">
+            {" "}
             <h3 className="text-2xl font-bold text-center mb-2">Vision</h3>
-
             <div className="w-24 h-1 bg-red-500 mx-auto mb-8"></div>
-
             <p className="text-gray-700 text-base leading-7">
               To provide painless, modern, and patient-friendly dental care
               using advanced technology and compassionate service while
@@ -110,61 +109,95 @@ const About = () => {
           </div>
         </div>
 
+        {/* Clinic Environment */}
+        {/* Clinic Environment */}
         <h1 className="font-bold text-3xl text-center mb-4 mt-10">
           Clinic <span className="text-[#3ea0d0] italic">Environment</span>
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-10 py-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-0 md:px-10 py-4">
           <img
             src="/src/assets/Waiting-Room-in-Green.jpg"
-            alt="Clinic Photo"
-            className="w-full h-56 object-cover"
+            alt="Clinic Environment"
+            className="w-full h-56 object-cover rounded-2xl shadow-sm cursor-pointer transition hover:scale-105"
+            onClick={() =>
+              setSelectedImage("/src/assets/Waiting-Room-in-Green.jpg")
+            }
           />
 
           <img
             src="/src/assets/mainn.jpg"
-            alt="Clinic Photo"
-            className="w-full h-56 object-cover"
+            alt="Clinic Office"
+            className="w-full h-56 object-cover rounded-2xl shadow-sm cursor-pointer transition hover:scale-105"
+            onClick={() => setSelectedImage("/src/assets/mainn.jpg")}
           />
 
           <img
             src="/src/assets/waitingg.jpg"
-            alt="Clinic Photo"
-            className="w-full h-56 object-cover"
+            alt="Clinic Waiting Room"
+            className="w-full h-56 object-cover rounded-2xl shadow-sm cursor-pointer transition hover:scale-105"
+            onClick={() => setSelectedImage("/src/assets/waitingg.jpg")}
           />
         </div>
 
+        {/*Team Members*/}
         <div>
           <h1 className="font-bold text-3xl text-center mt-10">
             Team <span className="text-[#3ea0d0] italic">Members</span>
           </h1>
-          <p className="italic text-xs text-center mb-5">
-            Passionate professionals dedicated to exceptional dental care{" "}
+          <p className="italic text-xs text-center mb-5 text-gray-500">
+            Passionate professionals dedicated to exceptional dental care
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-10 py-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-0 md:px-10 py-4">
             {doctors.map((doctor, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                className="bg-gray-50/50 p-4 rounded-2xl border border-gray-100 flex flex-col items-center text-center"
+              >
                 <img
                   src={doctor.image}
                   alt={doctor.name}
-                  className="w-full h-60 object-cover"
+                  className="w-full h-60 object-cover rounded-xl shadow-sm"
                 />
 
-                <h3 className="text-[#3BAFDA] font-semibold text-lg mt-2">
+                <h3 className="text-[#3BAFDA] font-semibold text-lg mt-3">
                   {doctor.name}
                 </h3>
 
-                <p className="text-gray-700 text-sml">{doctor.specialty}</p>
+                <p className="text-gray-600 text-sm">{doctor.specialty}</p>
               </div>
             ))}
           </div>
 
           <h1 className="font-bold text-4xl text-center mt-12 mb-6">
-            Certifications and <span className="text-[#3ea0d0] italic">Awards</span>
+            Certifications and{" "}
+            <span className="text-[#3ea0d0] italic">Awards</span>
           </h1>
         </div>
       </div>
+
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="absolute -top-12 right-0 text-white text-4xl font-bold"
+              onClick={() => setSelectedImage(null)}
+            >
+              ×
+            </button>
+
+            <img
+              src={selectedImage}
+              alt="Full Size"
+              className="max-w-[95vw] max-h-[90vh] rounded-2xl shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };
