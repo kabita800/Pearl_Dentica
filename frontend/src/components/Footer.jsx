@@ -4,73 +4,172 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#7DC8D3] py-10 px-6 md:px-10">
+    <footer className="bg-[#7DC8D3] py-6 md:py-10 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 order-1 md:order-none">
           {/* Logo */}
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left order-1">
             <img
               src="/src/assets/pearl_dentica 2.png"
               alt="Pearl Dentica"
-              className="w-28 mb-3"
+              className="w-24 mb-1"
             />
-            <p className="text-xs text-gray-800 leading-relaxed max-w-xs">
+
+            <p className="text-sm text-gray-800 leading-relaxed max-w-xs">
               Pearl Dentica Care is a modern dental clinic offering comfortable
               and compassionate dental care.
             </p>
             <div className="flex gap-4 mt-4 text-lg text-gray-800">
-              <a href="#" className="hover:text-sky-700 transition"><FaFacebook /></a>
-              <a href="#" className="hover:text-green-700 transition"><FaWhatsapp /></a>
-              <a href="#" className="hover:text-pink-700 transition"><FaInstagram /></a>
+              <a href="#" className="hover:text-sky-700 transition">
+                <FaFacebook />
+              </a>
+              <a href="#" className="hover:text-green-700 transition">
+                <FaWhatsapp />
+              </a>
+              <a href="#" className="hover:text-pink-700 transition">
+                <FaInstagram />
+              </a>
             </div>
           </div>
 
           {/* Links */}
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left order-2">
             <h2 className="text-lg font-bold mb-3 text-gray-950">Links</h2>
-            <ul className="space-y-2 text-sm text-gray-800">
+            <ul className="space-y-1 md:space-y-2 text-sm text-gray-800">
               <li>
-                <Link to="/" className="hover:text-sky-700 transition font-medium">Home</Link>
+                <Link
+                  to="/"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-sky-700 transition font-medium">About</Link>
+                <Link
+                  to="/about"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                  About
+                </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-sky-700 transition font-medium">Services</Link>
+                <Link
+                  to="/services"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                  Services
+                </Link>
               </li>
               <li>
-                <Link to="/doctors" className="hover:text-sky-700 transition font-medium">Doctors</Link>
+                <Link
+                  to="/doctors"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                  Doctors
+                </Link>
               </li>
               <li>
-                <Link to="/appointment" className="hover:text-sky-700 transition font-medium">Appointment</Link>
+                <Link
+                  to="/appointment"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                  Appointment
+                </Link>
               </li>
               <li>
-                <Link to="/gallery" className="hover:text-sky-700 transition font-medium">Gallery</Link>
+                <Link
+                  to="/gallery"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                  Gallery
+                </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-sky-700 transition font-medium">Contact</Link>
+                <Link
+                  to="/contact"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Services */}
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left order-3">
             <h2 className="text-lg font-bold mb-3 text-gray-950">Services</h2>
-            <ul className="space-y-2 text-sm text-gray-800 font-medium">
-              <li>Teeth Whitening</li>
-              <li>Dental Implants</li>
-              <li>Braces & Aligners</li>
-              <li>Root Canal Treatment</li>
-              <li>Smile Makeover</li>
-              <li>Pediatric Dentistry</li>
-              <li>Dental Cleaning</li>
+            <ul className="space-y-1 md:space-y-2 text-sm text-gray-800">
+              <li>
+                <Link
+                  to="/services"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                  Teeth Whitening
+                </Link>
+              </li>
+
+              <li>
+                 <Link
+                  to="/services"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                   Dental Implants
+                </Link>
+               </li>
+
+
+              <li>
+                 <Link
+                  to="/services"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                   Braces & Aligners
+                </Link>
+                </li>
+
+
+              <li>
+                <Link
+                  to="/services"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                   Root Canal Treatment
+                </Link>
+                </li>
+
+              <li>
+                <Link
+                  to="/services"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                   Smile Makeover
+                </Link>
+                </li>
+
+              <li>
+                 <Link
+                  to="/services"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                   Pediatric Dentistry
+                </Link>
+
+                </li>
+              <li>
+               <Link
+                  to="/services"
+                  className="hover:text-sky-700 transition font-medium"
+                >
+                   Dental Cleaning
+                </Link>
+                </li>
             </ul>
           </div>
 
           {/* Contact */}
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left order-4">
             <h2 className="text-lg font-bold mb-3 text-gray-950">Contact</h2>
-            <div className="space-y-3 text-sm text-gray-800">
+            <div className="space-y-2 md:space-y-3 text-sm text-gray-800">
               <div>
                 <p className="font-bold">Phone:</p>
                 <p className="mt-0.5">+977 9804457781</p>
@@ -87,10 +186,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-400/40 mt-8 pt-4 text-center">
-          <p className="text-xs text-gray-800">
+        <div className="border-t border-gray-400/40 mt-4 pt-3 text-center">
+          <p className="text-sm md:text-md text-gray-8000">
             © {new Date().getFullYear()} All rights reserved by
-            <span className="text-red-700 font-semibold ml-1">Pearl Dentica</span>
+            <span className="text-red-700 font-semibold ml-1">
+              Pearl Dentica
+            </span>
           </p>
         </div>
       </div>

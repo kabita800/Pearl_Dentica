@@ -5,6 +5,8 @@ import { PiBracketsCurlyBold } from "react-icons/pi";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { Plus, Minus } from "lucide-react";
+import BeforeAfterCard from "../components/BeforeAfterCard";
+import { useRef } from "react";
 
 const Home = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -12,26 +14,32 @@ const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [slider, setSlider] = useState(50);
+
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
 
   const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
 
   const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    const deltaX = e.touches[0].clientX - touchStartX.current;
+    const deltaY = e.touches[0].clientY - touchStartY.current;
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      e.preventDefault();
+    }
   };
 
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+  const handleTouchEnd = (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - touchStartX.current;
 
-    const distance = touchStart - touchEnd;
-
-    if (distance > 50 && activeSlide < 2) {
-      setActiveSlide(activeSlide + 1); // swipe left
-    }
-
-    if (distance < -50 && activeSlide > 0) {
-      setActiveSlide(activeSlide - 1); // swipe right
+    if (diff > 50) {
+      setActiveSlide((prev) => Math.max(prev - 1, 0));
+    } else if (diff < -50) {
+      setActiveSlide((prev) => Math.min(prev + 1, 2));
     }
   };
 
@@ -50,18 +58,18 @@ const Home = () => {
     },
     {
       image: "/src/assets/d5.webp",
-      name: "Dr. Sarah Khan",
+      name: "Dr. James Gurung",
       specialization: "Orthodontist",
     },
     {
-      image: "/src/assets/d1.jpg",
-      name: "Dr. James Lee",
+      image: "/src/assets/d7.avif",
+      name: "Dr. Roshni Gurung",
       specialization: "Cosmetic Dentist",
     },
     {
-      image: "/src/assets/d5.webp",
-      name: "Dr. Emily Brown",
-      specialization: "Periodontist",
+      image: "/src/assets/d13.png",
+      name: "Dr. Manish B.K",
+      specialization: "Pediatric Dentistry",
     },
   ];
 
@@ -98,6 +106,7 @@ const Home = () => {
         "You can book an appointment online, by phone, or by visiting our clinic.",
     },
   ];
+
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -161,7 +170,7 @@ const Home = () => {
               <img
                 src="/src/assets/dental.jpg"
                 alt="Dental Care"
-                className="w-full max-w-[280px] h-[270px] object-cover shadow-md"
+                className="w-full max-w-[280px] h-[320px] mb-20 object-cover shadow-md"
               />
             </div>
 
@@ -191,7 +200,7 @@ const Home = () => {
               <img
                 src="/src/assets/img-2.webp"
                 alt="Dental Checkup"
-                className="w-full max-w-[280px] h-[270px] object-cover shadow-md"
+                className="w-full max-w-[280px] h-[300px] object-cover shadow-md"
               />
 
               <div className="mt-6 text-center md:text-left w-full max-w-[280px]">
@@ -211,11 +220,13 @@ const Home = () => {
           Services <span className="text-[#3BAFDA] italic">Overview</span>
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {/* Card 1 */}
           <div className="bg-[#D8EAF1] p-6 min-h-[220px] hover:shadow-lg transition rounded-2xl">
-            <FaTooth className="text-4xl mb-4 text-[#3BAFDA]" />
-            <h3 className="text-2xl font-bold mb-3">Teeth Whitening</h3>
+            <FaTooth className="text-4xl mb-4 text-black" />
+            <h3 className="text-lg md:text-2xl font-bold mb-3">
+              Teeth Whitening
+            </h3>
             <p className="text-gray-700 leading-relaxed text-sm">
               Safely remove stains and discoloration to achieve a brighter, more
               confident smile.
@@ -224,8 +235,10 @@ const Home = () => {
 
           {/* Card 2 */}
           <div className="bg-[#D8EAF1] p-6 min-h-[220px] hover:shadow-lg transition rounded-2xl">
-            <FaTeeth className="text-4xl mb-4 text-[#3BAFDA]" />
-            <h3 className="text-2xl font-bold mb-3">Dental Implants</h3>
+            <FaTeeth className="text-4xl mb-4 text-black" />
+            <h3 className="text-lg md:text-2xl font-bold mb-3">
+              Dental Implants
+            </h3>
             <p className="text-gray-700 leading-relaxed text-sm">
               Replace missing teeth with natural-looking, long-lasting solutions
               that restore function and confidence.
@@ -234,8 +247,10 @@ const Home = () => {
 
           {/* Card 3 */}
           <div className="bg-[#D8EAF1] p-6 min-h-[220px] hover:shadow-lg transition rounded-2xl">
-            <PiBracketsCurlyBold className="text-4xl mb-4 text-[#3BAFDA]" />
-            <h3 className="text-2xl font-bold mb-3">Braces & Aligners</h3>
+            <PiBracketsCurlyBold className="text-4xl mb-4 text-black" />
+            <h3 className="text-lg md:text-2xl font-bold mb-3">
+              Braces & Aligners
+            </h3>
             <p className="text-gray-700 leading-relaxed text-sm">
               Straighten teeth comfortably with modern orthodontic treatments
               designed for every age.
@@ -244,8 +259,10 @@ const Home = () => {
 
           {/* Card 4 */}
           <div className="bg-[#D8EAF1] p-6 min-h-[220px] hover:shadow-lg transition rounded-2xl">
-            <FaRegSmile className="text-4xl mb-4 text-[#3BAFDA]" />
-            <h3 className="text-2xl font-bold mb-3">Smile Makeover</h3>
+            <FaRegSmile className="text-4xl mb-4 text-black" />
+            <h3 className="text-lg md:text-2xl font-bold mb-3">
+              Smile Makeover
+            </h3>
             <p className="text-gray-700 leading-relaxed text-sm">
               Enhance your smile with a complete cosmetic dental transformation
               tailored to your needs.
@@ -264,8 +281,8 @@ const Home = () => {
       </section>
 
       {/* why choose us */}
-      <section className="py-16 px-4 md:px-16">
-        <h1 className="text-4xl font-bold text-center mb-10">
+      <section className="py-4 px-4 md:px-16">
+        <h1 className="text-4xl font-bold text-center mb-4">
           Why <span className="text-[#3BAFDA] italic">choose</span> us?
         </h1>
 
@@ -340,26 +357,26 @@ const Home = () => {
       </section>
 
       {/* Doctors/Expert */}
-      <section className="py-12 bg-gray-50/50">
+      <section className="py-4 bg-gray-50/50">
         <h1 className="text-3xl font-bold text-center mb-8 text-[#3BAFDA] italic">
           Doctors & Experts
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-20 py-4 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 px-4 md:px-20 py-4 max-w-7xl mx-auto">
           {doctors.map((doctor, index) => (
             <div key={index} className="relative overflow-hidden group">
               <img
                 src={doctor.image}
                 alt={doctor.name}
-                className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-[250px] md:h-[400px] object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
               {/* Doctor Info Box */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[88%] bg-white shadow-xl py-4 px-2 text-center">
-                <h3 className="text-xl font-bold text-[#3BAFDA]">
+              <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 w-[92%] md:w-[88%] bg-white shadow-xl py-2 md:py-4 px-2 text-center">
+                <h3 className="text-sm md:text-xl font-bold text-[#3BAFDA]">
                   {doctor.name}
                 </h3>
-                <p className="text-gray-700 text-md mt-1">
+                <p className="text-gray-700 text-xs md:text-md mt-1">
                   {doctor.specialization}
                 </p>
               </div>
@@ -378,69 +395,73 @@ const Home = () => {
       </section>
 
       {/* before and after the smile showcase */}
-      <section className="py-16 px-4">
+      <section className="py-2 px-4">
         <h1 className="text-3xl font-bold text-center mb-8">
           Before and After the{" "}
-          <span className="text-[#3BAFDA] italic">smile showcase</span>
+          <span className="text-[#3BAFDA] italic">Smile Showcase</span>
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:px-18 py-4 max-w-7xl mx-auto">
-          {/* Dental Implants */}
-          <div className="text-center bg-white p-4">
-            <img
-              src="/src/assets/before1.webp"
-              alt="Dental Implants"
-              className="w-full h-48 object-cover"
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 p-6 px-20">
+          {/* Card 1 */}
+          <div className="text-center">
+            <BeforeAfterCard
+              before="/src/assets/bracesbeffore.jpg"
+              after="/src/assets/bracessbefore&after.jpg"
             />
-            <h3 className="text-xl font-bold text-[#3BAFDA] mt-3">
-              Dental Implants
+
+            <h3 className="mt-4 text-xl font-bold text-[#3BAFDA]">
+              Braces & Aligners
             </h3>
-            <p className="text-gray-600 text-xs">
-              Complete restoration, natural feel
+
+            <p className="text-gray-600 text-sm mt-1">
+              Complete restoration with a natural feel
             </p>
           </div>
 
-          {/* Teeth Whitening */}
-          <div className="text-center bg-white p-4">
-            <img
-              src="/src/assets/before2.webp"
-              alt="Teeth Whitening"
-              className="w-full h-48 object-contain"
+          {/* Card 2 */}
+          <div className="text-center">
+            <BeforeAfterCard
+              before="/src/assets/beforeShowcaseeee.png"
+              after="/src/assets/beforeshow.png"
             />
-            <h3 className="text-xl font-bold text-[#3BAFDA] mt-3">
+
+            <h3 className="mt-4 text-xl font-bold text-[#3BAFDA]">
               Teeth Whitening
             </h3>
-            <p className="text-gray-600 text-xs">
+
+            <p className="text-gray-600 text-sm mt-1">
               8 shades brighter in 1 session
             </p>
           </div>
 
-          {/* Smile Makeover */}
-          <div className="text-center bg-white p-4">
-            <img
-              src="/src/assets/image.jpeg"
-              alt="Smile Makeover"
-              className="w-full h-48 object-cover"
+          {/* Card 3 */}
+          <div className="text-center">
+            <BeforeAfterCard
+              before="/src/assets/beforee.jpeg"
+              after="/src/assets/after.jpeg"
             />
-            <h3 className="text-xl font-bold text-[#3BAFDA] mt-3">
+
+            <h3 className="mt-4 text-xl font-bold text-[#3BAFDA]">
               Smile Makeover
             </h3>
-            <p className="text-gray-600 text-xs">
+
+            <p className="text-gray-600 text-sm mt-1">
               Complete smile transformation tailored
             </p>
           </div>
 
-          {/* Dental Cleaning */}
-          <div className="text-center bg-white p-4">
-            <img
-              src="/src/assets/smile11.jpg"
-              alt="Dental Cleaning"
-              className="w-full h-48 object-contain"
+          {/* Card 4 */}
+          <div className="text-center">
+            <BeforeAfterCard
+              before="/src/assets/dentalimplantsbefpre&after.png"
+              after="/src/assets/dentalimplantsafter.png"
             />
-            <h3 className="text-xl font-bold text-[#3BAFDA] mt-3">
-              Dental Cleaning
+
+            <h3 className="mt-4 text-xl font-bold text-[#3BAFDA]">
+              Dental Implants
             </h3>
-            <p className="text-gray-600 text-xs">
+
+            <p className="text-gray-600 text-sm mt-1">
               Professional cleaning for healthier teeth
             </p>
           </div>
@@ -459,14 +480,21 @@ const Home = () => {
 
         {/* Mobile Testimonials */}
         <div
-          className="md:hidden px-4"
+          className="md:hidden px-4 overflow-hidden touch-pan-y"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm min-h-[250px]">
-            {activeSlide === 0 && (
-              <>
+          {/* Slider Track */}
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{
+              transform: `translateX(-${activeSlide * 100}%)`,
+            }}
+          >
+            {/* Slide 1 */}
+            <div className="w-full flex-shrink-0">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm min-h-[250px]">
                 <div className="text-yellow-400 text-lg mb-3">★★★★★</div>
                 <p className="text-gray-600 text-sm leading-6 mb-6">
                   I had my teeth whitening done here, and the results were
@@ -477,11 +505,12 @@ const Home = () => {
                   - Priya R.
                 </h4>
                 <p className="text-gray-500 text-xs">Teeth Whitening Patient</p>
-              </>
-            )}
+              </div>
+            </div>
 
-            {activeSlide === 1 && (
-              <>
+            {/* Slide 2 */}
+            <div className="w-full flex-shrink-0">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm min-h-[250px]">
                 <div className="text-yellow-400 text-lg mb-3">★★★★★</div>
                 <p className="text-gray-600 text-sm leading-6 mb-6">
                   The dental implant procedure was smooth and painless. The
@@ -492,11 +521,12 @@ const Home = () => {
                   - David T.
                 </h4>
                 <p className="text-gray-500 text-xs">Dental Implant Patient</p>
-              </>
-            )}
+              </div>
+            </div>
 
-            {activeSlide === 2 && (
-              <>
+            {/* Slide 3 */}
+            <div className="w-full flex-shrink-0">
+              <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm min-h-[250px]">
                 <div className="text-yellow-400 text-lg mb-3">★★★★★</div>
                 <p className="text-gray-600 text-sm leading-6 mb-6">
                   I brought my daughter for a dental checkup, and the team was
@@ -507,8 +537,8 @@ const Home = () => {
                   - Sarah S.
                 </h4>
                 <p className="text-gray-500 text-xs">Parent of Patients</p>
-              </>
-            )}
+              </div>
+            </div>
           </div>
 
           {/* Dots */}
@@ -528,53 +558,53 @@ const Home = () => {
         </div>
 
         {/* Desktop Testimonials */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-6 lg:px-12">
           {/* Card 1 */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 lg:p-10 shadow-md hover:shadow-xl transition">
             <div className="text-yellow-400 text-lg mb-3">★★★★★</div>
 
-            <p className="text-gray-600 text-sm leading-6 mb-6">
+            <p className="text-gray-600 text-base lg:text-lg leading-7 mb-6">
               I had my teeth whitening done here, and the results were amazing.
               The staff was professional, friendly, and made me feel comfortable
               throughout the process.
             </p>
 
-            <h4 className="font-bold text-base text-gray-950">- Priya R.</h4>
-            <p className="text-gray-500 text-xs">Teeth Whitening Patient</p>
+            <h4 className="font-bold text-lg text-gray-950">- Priya R.</h4>
+            <p className="text-gray-500 text-sm">Teeth Whitening Patient</p>
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 lg:p-10 shadow-md hover:shadow-xl transition">
             <div className="text-yellow-400 text-lg mb-3">★★★★★</div>
 
-            <p className="text-gray-600 text-sm leading-6 mb-6">
+            <p className="text-gray-600 text-base lg:text-lg leading-7 mb-6">
               The dental implant procedure was smooth and painless. The doctors
               explained everything clearly, and my new smile looks completely
               natural.
             </p>
 
-            <h4 className="font-bold text-base text-gray-950">- David T.</h4>
-            <p className="text-gray-500 text-xs">Dental Implant Patient</p>
+            <h4 className="font-bold text-lg text-gray-950">- David T.</h4>
+            <p className="text-gray-500 text-sm">Dental Implant Patient</p>
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+          <div className="bg-white border border-gray-200 rounded-2xl p-8 lg:p-10 shadow-md hover:shadow-xl transition">
             <div className="text-yellow-400 text-lg mb-3">★★★★★</div>
 
-            <p className="text-gray-600 text-sm leading-6 mb-6">
+            <p className="text-gray-600 text-base lg:text-lg leading-7 mb-6">
               I brought my daughter for a dental checkup, and the team was
               incredibly patient and caring. She actually looks forward to her
               visits now!
             </p>
 
-            <h4 className="font-bold text-base text-gray-950">- Sarah S.</h4>
-            <p className="text-gray-500 text-xs">Parent of Patients</p>
+            <h4 className="font-bold text-lg text-gray-950">- Sarah S.</h4>
+            <p className="text-gray-500 text-sm">Parent of Patients</p>
           </div>
         </div>
       </section>
 
       {/* Frequently Asked Questions */}
-      <section className="py-16 bg-white px-4">
+      <section className="py-12 bg-white px-4">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-center text-3xl md:text-4xl font-bold mb-10">
             Frequently Asked Questions{" "}
@@ -609,7 +639,7 @@ const Home = () => {
       </section>
 
       {/* Contact & Location */}
-      <section className="bg-white py-12 px-4">
+      <section className="bg-white py-8 px-4">
         <div className="max-w-[710px] mx-auto">
           <h2 className="text-center text-3xl font-bold mb-8 text-[#3BAFDA] italic">
             Contact & Location

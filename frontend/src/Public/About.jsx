@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 const doctors = [
   {
-    image: "/src/assets/d1.jpg",
-    name: "Dr. Pradip Bhattarai",
+    image: "/src/assets/d11.avif",
+    name: "Dr. Rajat Timsina",
     specialty: "Cosmetic Dentistry",
   },
   {
@@ -12,13 +12,13 @@ const doctors = [
     specialty: "Root Canal Treatment",
   },
   {
-    image: "/src/assets/d5.webp",
-    name: "Dr. Rima Shrestha",
+    image: "/src/assets/d9.avif",
+    name: "Dr. Lamish KC",
     specialty: "Dental Implants",
   },
   {
     image: "/src/assets/d3.webp",
-    name: "Dr. Pradip Bhattarai",
+    name: "Dr. Ashish Karki",
     specialty: "Smile Makeover",
   },
 ];
@@ -109,13 +109,13 @@ const About = () => {
           </div>
         </div>
 
-        {/* Clinic Environment */}
+        
         {/* Clinic Environment */}
         <h1 className="font-bold text-3xl text-center mb-4 mt-10">
           Clinic <span className="text-[#3ea0d0] italic">Environment</span>
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-0 md:px-10 py-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-0 md:px-0 py-4">
           <img
             src="/src/assets/Waiting-Room-in-Green.jpg"
             alt="Clinic Environment"
@@ -161,7 +161,7 @@ const About = () => {
                   className="w-full h-60 object-cover rounded-xl shadow-sm"
                 />
 
-                <h3 className="text-[#3BAFDA] font-semibold text-lg mt-3">
+                <h3 className="text-[#3BAFDA] font-bold text-lg mt-3">
                   {doctor.name}
                 </h3>
 
