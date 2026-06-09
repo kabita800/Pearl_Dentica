@@ -23,8 +23,31 @@ const doctors = [
   },
 ];
 
+const clinicImages = [
+  "/src/assets/Waiting-Room-in-Green.jpg",
+  "/src/assets/mainn.jpg",
+  "/src/assets/waitingg.jpg",
+];
+
 const About = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextImage = () => {
+    if (currentIndex < clinicImages.length - 1) {
+      const next = currentIndex + 1;
+      setCurrentIndex(next);
+      setSelectedImage(clinicImages[next]);
+    }
+  };
+
+  const prevImage = () => {
+    if (currentIndex > 0) {
+      const prev = currentIndex - 1;
+      setCurrentIndex(prev);
+      setSelectedImage(clinicImages[prev]);
+    }
+  };
 
   return (
     <section className=" bg-white">
@@ -109,37 +132,25 @@ const About = () => {
           </div>
         </div>
 
-        
         {/* Clinic Environment */}
         <h1 className="font-bold text-3xl text-center mb-4 mt-10">
           Clinic <span className="text-[#3ea0d0] italic">Environment</span>
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-0 md:px-0 py-4">
-          <img
-            src="/src/assets/Waiting-Room-in-Green.jpg"
-            alt="Clinic Environment"
-            className="w-full h-56 object-cover rounded-2xl shadow-sm cursor-pointer transition hover:scale-105"
-            onClick={() =>
-              setSelectedImage("/src/assets/Waiting-Room-in-Green.jpg")
-            }
-          />
-
-          <img
-            src="/src/assets/mainn.jpg"
-            alt="Clinic Office"
-            className="w-full h-56 object-cover rounded-2xl shadow-sm cursor-pointer transition hover:scale-105"
-            onClick={() => setSelectedImage("/src/assets/mainn.jpg")}
-          />
-
-          <img
-            src="/src/assets/waitingg.jpg"
-            alt="Clinic Waiting Room"
-            className="w-full h-56 object-cover rounded-2xl shadow-sm cursor-pointer transition hover:scale-105"
-            onClick={() => setSelectedImage("/src/assets/waitingg.jpg")}
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-0 py-4">
+          {clinicImages.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Clinic ${index + 1}`}
+              className="w-full h-56 object-cover rounded-2xl shadow-sm cursor-pointer transition hover:scale-105"
+              onClick={() => {
+                setSelectedImage(image);
+                setCurrentIndex(index);
+              }}
+            />
+          ))}
         </div>
-
         {/*Team Members*/}
         <div>
           <h1 className="font-bold text-3xl text-center mt-10">
@@ -182,19 +193,46 @@ const About = () => {
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="relative flex items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Previous */}
+            {currentIndex > 0 && (
+              <button
+                onClick={prevImage}
+                className="absolute left-2 md:-left-14 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 text-white text-xl md:text-2xl hover:bg-[#3BAFDA] transition z-50"
+              >
+                ❮
+              </button>
+            )}
+
+            {/* Image */}
+            <div className="w-[90vw] md:w-[900px] h-[300px] md:h-[600px] bg-black rounded-2xl overflow-hidden flex items-center justify-center">
+              <img
+                src={selectedImage}
+                alt="Full Size"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Next */}
+            {currentIndex < clinicImages.length - 1 && (
+              <button
+                onClick={nextImage}
+                className="absolute right-2 md:-right-14 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 text-white text-xl md:text-2xl hover:bg-[#3BAFDA] transition z-50"
+              >
+                ❯
+              </button>
+            )}
+
+            {/* Close */}
             <button
               className="absolute -top-12 right-0 text-white text-4xl font-bold"
               onClick={() => setSelectedImage(null)}
             >
               ×
             </button>
-
-            <img
-              src={selectedImage}
-              alt="Full Size"
-              className="max-w-[95vw] max-h-[90vh] rounded-2xl shadow-2xl"
-            />
           </div>
         </div>
       )}
